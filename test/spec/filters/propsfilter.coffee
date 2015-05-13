@@ -10,6 +10,6 @@ describe 'Filter: propsFilter', ->
   beforeEach inject ($filter) ->
     propsFilter = $filter 'propsFilter'
 
-  it 'should return the input prefixed with "propsFilter filter:"', ->
-    text = 'angularjs'
-    expect(propsFilter text).toBe ('propsFilter filter: ' + text)
+#  it 'should return the input prefixed with "propsFilter filter:"', ->
+#    text = 'angularjs'
+#    expect(propsFilter text).toBe ('propsFilter filter: ' + text)

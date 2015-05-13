@@ -9,14 +9,16 @@
 ###
 angular.module 'edudashApp'
 .controller 'ShowdataCtrl', [
-    '$scope', '$log', 'CKanApi'
-    ($scope, $log, CKanApi) ->
-      CKanApi.getdata().then (data) ->
-        $log.debug data.result.records
+    '$scope', '$log', 'OpenDataApi'
+    ($scope, $log, OpenDataApi) ->
+
+      simpleCSV = 'http://opendata.go.tz/sw/dataset/3de642ad-fac1-46d8-a95b-e4a10be184db/resource/3221ccb4-3b75-4137-a8bd-471a436ed7a5/download/Enrolment-by-Regions.csv'
+      OpenDataApi.getCsv(simpleCSV).getDataSet (data) ->
+        #$log.debug data.result.records
         $scope.opendata = data.result.records
         $scope.opendatafield = data.result.fields
 
-      CKanApi.getodata().success (data) ->
+      OpenDataApi.getodata().success (data) ->
         $scope.mydata = data.rows
 
       $scope.educationValues = [
@@ -25,28 +27,35 @@ angular.module 'edudashApp'
         {value: 'elimu-ya-sekondari', label: 'Secondary'},
         {value: 'elimu-ya-watu-wazima-na-elimu-nje-ya-mfumo-rasmi', label: 'Adult and Non-Formal Education'}
       ]
+      $scope.sumUp =
+        total: 25
 
       $scope.education = 'elimu-ya-msingi'
 
-      CKanApi.getDatasetType($scope.education).then (data) ->
+      OpenDataApi.getDatasetType($scope.education).then (data) ->
         $scope.datasetValues = data.result.resources
 
-      CKanApi.getCsvValue().then (data) ->
-        $log.debug data
+#      OpenDataApi.getCsv('http://opendata.go.tz/sw/dataset/3de642ad-fac1-46d8-a95b-e4a10be184db/resource/3221ccb4-3b75-4137-a8bd-471a436ed7a5/download/Enrolment-by-Regions.csv').getDataSet (data) ->
+#        $log.debug data
 
       $scope.selectEducation = () ->
         $log.debug $scope.education
-        CKanApi.getDatasetType($scope.education).then((data) ->
-          $log.debug data.result
+        OpenDataApi.getDatasetType($scope.education).then((data) ->
+          #$log.debug data.result
           $scope.datasetValues = data.result.resources
         )
 
       $scope.selectDataset = () ->
         $log.debug $scope.dataset
-        CKanApi.getDataset($scope.dataset).then (data) ->
-          $log.debug data.result
+        OpenDataApi.getCsv($scope.dataset).getDataSet (data) ->
+          #$log.debug data.result
           $scope.opendatafield = data.result.fields
           $scope.opendata = data.result.records
+          $scope.sumUp =
+            total: data.result.records.length
+            sum: data.result.records.reduce (t, s) ->
+                $log.debug " " + t + " + " + s['Total']
+                parseInt(t if t?) or 0 + parseInt(s['Total'] if (s['Total']?)) or 0
 
       $scope.awesomeThings = [
         'HTML5 Boilerplate'

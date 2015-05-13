@@ -10,5 +10,5 @@ describe 'Service: cartodb', ->
   beforeEach inject (_cartodb_) ->
     cartodb = _cartodb_
 
-  it 'should do something', ->
-    expect(!!cartodb).toBe true
+#  it 'should do something', ->
+#    expect(!!cartodb).toBe true

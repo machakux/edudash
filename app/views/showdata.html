@@ -5,15 +5,24 @@
         <select ng-model="education" ng-options="e.value as e.label for e in educationValues" ng-change="selectEducation()"></select>
     </div>
     <div class="row boxlink-container">
-        <select ng-model="dataset" ng-options="d.id as d.name for d in datasetValues" ng-change="selectDataset()"></select>
+        <select ng-model="dataset" ng-options="d.url as d.name for d in datasetValues" ng-change="selectDataset()"></select>
+    </div>
+    <div class="row boxlink-container">
+        <label>Filter: </label><input ng-model="searchText" type="text">
     </div>
 
 	<table width="100%" border="1px solid">
-		<th ng-repeat="row in opendatafield">{{row.id}}</th>
-    	<tr ng-repeat="row in opendata">
-    		<td ng-repeat="rf in opendatafield">{{row[rf.id]}}</td>
+		<th ng-repeat="field in opendatafield">{{field}}</th>
+    	<tr ng-repeat="row in resultValue=(opendata | filter:searchText)">
+    		<td ng-repeat="rf in opendatafield">{{row[rf]}}</td>
     	</tr>
+        <tr>
+            <td ng-repeat="field in opendatafield">{{resultValue | sumUpFilter: field}}</td>
+        </tr>
     </table>
+    <div class="row boxlink-container">
+        {{sumUp}}
+    </div>
 
     <div class="row boxlink-container">&nbsp;</div>
 </div>
