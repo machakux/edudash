@@ -34,6 +34,8 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
           hovered: null
           lastHovered: null
           selected: null
+          _locations: null  # half of the allSchools payload
+          _details: null  # the other half
           allSchools: null
           filteredSchools: null
           pins: null
@@ -64,6 +66,16 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
           ([viewMode, year, rest...], [oldViewMode]) -> if year?
             if viewMode == 'schools' then loadSchools viewMode, year, rest...
             else if oldViewMode == 'schools' then clearSchools()
+
+        $scope.$watchGroup ['_locations', '_details'], ([locationsP, detailsP]) ->
+          if locationsP? and detailsP?
+            $scope.allSchools = $q (resolve, reject) ->
+              $q.all
+                  locations: locationsP
+                  details: detailsP
+                .then ({locations, details}) ->
+                  resolve joinBy 'CODE', locations, details
+                .catch reject
 
         $scope.$watchGroup ['schoolType', 'rankBy', 'moreThan40'],
           ([schoolType, rankBy, moreThan40]) ->
@@ -164,15 +176,19 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
           $scope.filtersHeight = opts.height
 
         loadSchools = (viewMode, year, schoolType, rankBy, moreThan40) ->
-          $scope.allSchools = OpenDataApi.getSchools
-              year: year
-              schoolType: schoolType
-              subtype: rankBy
-              moreThan40: moreThan40
-            .catch (err) -> $log.error err
+          query =
+            year: year
+            schoolType: schoolType
+            subtype: rankBy
+            moreThan40: moreThan40
+          angular.extend $scope,
+            _locations: OpenDataApi.getLocations query
+            _details: OpenDataApi.getDetails query
+
           # leaving this as is for now, since we don't have this at school level
-          MetricsSrv.getPupilTeacherRatio({level: schoolType}).then (data) ->
+          MetricsSrv.getPupilTeacherRatio({level: $scope.schoolType}).then (data) ->
             $scope.pupilTeacherRatio = data.rate
+
 
         clearSchools = ->
           $scope.allSchools = null
@@ -211,6 +227,13 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
                     PASS_RATE: year.PASS_RATE
                   agg
                 ), {}
+
+        joinBy = (prop, a, b) ->
+          bByProp = _(b).reduce ((obj, el) ->
+            obj[el[prop]] = el
+            obj
+          ), {}
+          a.map (el) -> angular.extend {}, el, bByProp[el[prop]]
 
         findSchool = (code) ->
           $q (resolve, reject) ->

@@ -68,14 +68,21 @@ angular.module 'edudashAppSrv'
         req = $resource ckanQueryURL
         req.get($params).$promise
 
-      getSchools: ({year, schoolType, moreThan40, subtype}) ->
+      getLocations: ({year, schoolType, moreThan40, subtype}) ->
+        ckanResp $http.get ckanQueryURL, params: sql: "
+          SELECT
+            \"CODE\",
+            \"LATITUDE\",
+            \"LONGITUDE\",
+            \"NAME\"
+          FROM \"#{getTable schoolType, subtype}\"
+          #{getConditions schoolType, moreThan40, year}"
+
+      getDetails: ({year, schoolType, moreThan40, subtype}) ->
         ckanResp $http.get ckanQueryURL, params: sql: "
           SELECT
             \"CODE\",
             \"DISTRICT\",
-            \"NAME\",
-            \"LATITUDE\",
-            \"LONGITUDE\",
             \"PASS_RATE\",
             \"REGION\",
             \"WARD\"
