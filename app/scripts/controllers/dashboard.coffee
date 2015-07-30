@@ -138,21 +138,15 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
             if $scope.viewMode == 'schools'
               getSchoolPin(thing.CODE).then (pin) ->
                 pin.bringToFront()
-                pin.setStyle
-                  color: '#05a2dc'
-                  weight: 5
-                  opacity: 1
-                  fillOpacity: 1
+                pin.setRadius 12
+                colorPin thing.CODE, pin, true
             #   when 'regional' then weight: 5, opacity: 1
 
           if oldThing != null
             if $scope.viewMode == 'schools'
               getSchoolPin(oldThing.CODE).then (pin) ->
-                pin.setStyle
-                  color: '#fff'
-                  weight: 2
-                  opacity: 0.5
-                  fillOpacity: 0.6
+                pin.setRadius 8
+                colorPin oldThing.CODE, pin
               # when 'regional' then weight: 0, opacity: 0.6
 
         $scope.$watch 'selected', (school) ->
@@ -315,11 +309,11 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
               options: options
 
 
-        colorPin = (code, l) -> findSchool(code).then (school) ->
+        colorPin = (code, l, hovered) -> findSchool(code).then (school) ->
           v = switch
             when $scope.visMode == 'passrate' then school.PASS_RATE
             when $scope.visMode == 'ptratio' then school.pt_ratio
-          l.setStyle colorSrv.pinStyle v, $scope.visMode
+          l.setStyle colorSrv.pinStyle v, $scope.visMode, hovered
 
         groupByDistrict = (rows) ->
           districts = {}

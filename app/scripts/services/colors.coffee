@@ -32,9 +32,11 @@ angular.module 'edudashAppSrv'
     colorize: (val, mode) ->
       this.colors[this.categorize val, mode]
 
-    pinStyle: (val, mode) ->
-      color: '#fff'
-      fillOpacity: 0.75
+    pinStyle: (val, mode, hovered) ->
+      weight: if hovered then 6 else 2
+      opacity: 1
+      color: if hovered then '#05a2dc' else '#fff'
+      fillOpacity: 1
       fillColor: this.colorize val, mode
 
     areaStyle: (val, mode) ->
