@@ -11,24 +11,18 @@ describe 'watchComputeSrv', ->
     b = _bracketsSrv_
 
   it 'should validate getMetric parameters', ->
-    expect -> b.getMetric()
-      .toThrow new Error "Unknown school type 'undefined'"
-    expect -> b.getMetric 'bad school type'
-      .toThrow new Error "Unknown school type 'bad school type'"
-    expect -> b.getMetric 'primary'
-      .toThrow new Error "Unknown criteria 'undefined'"
-    expect -> b.getMetric 'primary', 'bad criteria'
-      .toThrow new Error "Unknown criteria 'bad criteria'"
+    expect -> b.getVisMetric()
+      .toThrow new Error "Unknown vis mode 'undefined'"
+    expect -> b.getVisMetric 'bad visMode'
+      .toThrow new Error "Unknown vis mode 'bad visMode'"
 
   it 'should provide the correct metric from getMetric', ->
     # exhaustive check because we can
-    expect b.getMetric 'primary', 'performance'
+    expect b.getVisMetric 'passrate'
       .toEqual 'PASS_RATE'
-    expect b.getMetric 'primary', 'improvement'
-      .toEqual 'PASS_RATE'
-    expect b.getMetric 'secondary', 'performance'
-      .toEqual 'AVG_GPA'
-    expect b.getMetric 'secondary', 'improvement'
+    expect b.getVisMetric 'ptratio'
+      .toEqual 'PUPIL_TEACHER_RATIO'
+    expect b.getVisMetric 'gpa'
       .toEqual 'AVG_GPA'
 
   it 'should validate getSortMetric parameters', ->

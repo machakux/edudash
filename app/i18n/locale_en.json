@@ -30,6 +30,7 @@
     "legend.unknown": "Unknown",
     "legend.passrate": "Pass Rate",
     "legend.ptratio": "Pupil-Teacher Ratio",
+    "legend.gpa": "Average GPA",
     "filters.title": "filters",
     "chart.dial-title": "CHANGE SINCE",
     "chart.details": "Click for details",

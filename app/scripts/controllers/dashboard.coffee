@@ -32,7 +32,6 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
           metric: null
           sortMetric:  null
           viewMode: null  # set after init
-          visMode: 'passrate'
           schoolType: $routeParams.type
           polyType: null
           hovered: null
@@ -77,7 +76,7 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
           select: (code) -> $scope.selectedCode = code
           search: (q) -> search q
           hasBadge: (b, st, v) -> brackets.hasBadge b, st, v
-          getBracket: (v, m) -> brackets.getBracket v, (m or $scope.metric)
+          getBracket: (v, m) -> brackets.getBracket v, (m or $scope.visMetric)
           getColor: (v, m) -> colorSrv.color $scope.getBracket v, m
           getArrow: (v, m) -> colorSrv.arrow $scope.getBracket v, m
 
@@ -88,13 +87,10 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
 
         watchCompute = watchComputeSrv $scope
 
-        watchCompute 'metric',
-          dependencies: ['schoolType', 'rankBy']
-          computer: ([schoolType, criteria]) ->
-            unless schoolType? and criteria?
-              null
-            else
-              brackets.getMetric schoolType, criteria
+        watchCompute 'visMetric',
+          dependencies: ['visMode']
+          computer: ([visMode]) ->
+            brackets.getVisMetric visMode
 
         watchCompute 'sortMetric',
           dependencies: ['schoolType', 'rankBy']
@@ -606,6 +602,7 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
           if $scope.schoolType == 'primary'
             $scope.rankBy = 'performance'
           $scope.setYear 2014  # hard-coded default to speed up page-load
+          $scope.visMode = if $scope.schoolType == 'primary' then 'passrate' else 'gpa' # this shall be the default visMode
           OpenDataApi.getYears $scope.schoolType, $scope.rankBy
             .then (years) -> $scope.years = _(years).map (y) -> y.YEAR_OF_RESULT
           # fix the map's container awareness (it gets it wrong)
@@ -633,11 +630,11 @@ angular.module('edudashAppCtrl').controller 'DashboardCtrl', [
 
         colorPin = (code, layer) ->
           findSchool(code).then (school) ->
-            val = school[$scope.metric]
+            val = school[$scope.visMetric]
             layer.setStyle colorSrv.pinOff $scope.getColor val
 
         colorPoly = (feature, layer) ->
-          val = feature.properties[$scope.metric]
+          val = feature.properties[$scope.visMetric]
           layer.setStyle colorSrv.polygonOff $scope.getColor val
 
         getDetailsByPoly = (schools, polyType, schoolType) ->

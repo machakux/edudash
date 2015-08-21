@@ -86,14 +86,12 @@ angular.module('edudashAppSrv').service 'bracketsSrv', ->
       else throw new Error "Unknown schoolType '#{schoolType}'"
 
 
-  getMetric: (schoolType, criteria) ->
-    unless schoolType in ['primary', 'secondary']
-      throw new Error "Unknown school type '#{schoolType}'"
-    unless criteria in ['performance', 'improvement']
-      throw new Error "Unknown criteria '#{criteria}'"
-    switch schoolType
-      when 'primary' then 'PASS_RATE'
-      when 'secondary' then 'AVG_GPA'
+  getVisMetric: (visMode) ->
+    switch visMode
+      when 'passrate' then 'PASS_RATE'
+      when 'ptratio' then 'PUPIL_TEACHER_RATIO'
+      when 'gpa' then 'AVG_GPA'
+      else throw new Error "Unknown vis mode '#{visMode}'"
 
   getSortMetric: (schoolType, criteria) ->
     unless schoolType in ['primary', 'secondary']
