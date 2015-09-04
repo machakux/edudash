@@ -28,8 +28,10 @@ angular.module('i18nEdudashApp', [
             label: 'Kiswahili'
           }
         ]
+        scope.selectedLang = 'en'
         scope.changeLanguage = (key) ->
           $translate.use(key)
+          scope.selectedLang = key
   ])
   .config ($translateProvider) ->
     $translateProvider.useStaticFilesLoader(

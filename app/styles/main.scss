@@ -332,6 +332,8 @@ div.cartodb-share a{
 
 #nav-tabs-dashboard.nav-tabs > li:last-child a{
   border-right: none;
+  background:$body-text-color;
+  color:#ffffff;
 }
 .nav-tabs > li > a {
   box-sizing: border-box;
@@ -365,6 +367,7 @@ div.cartodb-share a{
   transition: all 250ms ease-in;
   cursor: pointer;
 }
+
 .link {
   color: $theme-blue;
   cursor: pointer;
@@ -800,6 +803,54 @@ table.districts p {
 .navbar-lang li a:hover,
 .navbar-lang li.active a{
   color: #1595d3;
+}
+
+/*education nav*/
+.navbar-education {
+  @include border-radius(5px);
+  float: left;
+  margin-left: 20px;
+  background: #f0f0f0;
+  margin-top: 10px;
+  padding-top: 17px;
+  padding-bottom: 13px;
+}
+
+.navbar-education ul{
+  height:20px;
+  display:block;
+}
+
+.navbar-education li{
+  border-right: 1px solid #1595d3;
+  display:inline;
+}
+
+.navbar-education li:last-child{
+  border-right: none;
+}
+
+.navbar-education li a{
+  color: #aaaaaa;
+  padding-top:0;
+  padding-bottom:0;
+  line-height:14px;
+  outline:none;
+  -webkit-transition: color 300ms ease-in;
+  -moz-transition: color 300ms ease-in;
+  -o-transition: color 300ms ease-in;
+  transition: color 300ms ease-in;
+  cursor:pointer;
+}
+
+.navbar-education li a:hover {
+  color: #f0f0f0;
+}
+.navbar-education li.active a{
+  color: #f0f0f0;
+}
+.navbar-education li.active {
+  background: $theme-blue
 }
 
 /*main nav*/

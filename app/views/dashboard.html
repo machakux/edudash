@@ -108,10 +108,10 @@
     <div class="row map-widget-row">
       <div class="col-sm-12 map-container">
         <ul class="nav nav-tabs" id="nav-tabs-dashboard">
-          <li role="presentation" ng-class="{active: polyType==='regions'}">
-            <a ng-click="togglePolygons('regions')">
-              <span class="hide-sm" translate="tab.regional-view">Regions</span>
-              <span class="show-sm" translate="tab.regional">Regional</span>
+          <li role="presentation" ng-class="{active: viewMode === 'schools'}">
+            <a ng-click="setViewMode('schools');">
+              <span class="hide-sm" translate="tab.school-view">Schools</span>
+              <span class="show-sm" translate="tab.school">Schools</span>
             </a>
           </li>
           <li role="presentation" ng-class="{active: polyType==='districts'}">
@@ -120,16 +120,10 @@
               <span class="show-sm" translate="tab.district">Regional</span>
             </a>
           </li>
-          <li role="presentation" ng-class="{active: schoolType==='primary'}">
-            <a ng-click="setSchoolType('primary')">
-              <span class="hide-sm" translate="tab.primary-schools-mode">Primary Schools</span>
-              <span class="show-sm" translate="tab.primary">Primary</span>
-            </a>
-          </li>
-          <li role="presentation" ng-class="{active: schoolType==='secondary'}">
-            <a ng-click="setSchoolType('secondary')">
-              <span class="hide-sm" translate="tab.secondary-schools-mode">Secondary Schools</span>
-              <span class="show-sm" translate="tab.secondary">Secondary</span>
+          <li role="presentation" ng-class="{active: polyType==='regions'}">
+            <a ng-click="togglePolygons('regions')">
+              <span class="hide-sm" translate="tab.regional-view">Regions</span>
+              <span class="show-sm" translate="tab.regional">Regional</span>
             </a>
           </li>
           <li role="presentation" class="dropdown">

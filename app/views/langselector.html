@@ -1,5 +1,7 @@
 <div class="navbar-lang">
-    <ul class="nav navbar-nav">
-        <li ng-repeat="lang in langList"><a ng-click="changeLanguage('{{lang.lang}}')">{{lang.label}}</a></li>
-    </ul>
+  <ul class="nav navbar-nav">
+    <li ng-repeat="lang in langList" ng-class="{active: selectedLang==lang.lang}">
+      <a ng-click="changeLanguage('{{lang.lang}}')">{{lang.label}}</a>
+    </li>
+  </ul>
 </div>
