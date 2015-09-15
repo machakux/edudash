@@ -2,86 +2,115 @@
 @import "mixins";
 
 
-// start: max width 1280
-@media only screen and (max-width: $g) {
-  .navbar-brand {
+.navbar-brand {
+  @media only screen and (max-width: $g) {
     padding-right: 20px;
   }
-  .footer {
+  @media only screen and (max-width: $a) {
+    padding-right: 0;
+  }
+}
+
+.footer {
+  @media only screen and (max-width: $g) {
     position: relative;
     p {
       margin-top: 8px;
     }
   }
-  .google-form {
+  @media only screen and (min-width: $g) {
+    bottom: 0;
+    position: fixed;
+  }
+  @media only screen and (max-width: $f) {
+    bottom: 0;
+  }
+  @media only screen and (max-width: $e) {
+    position: relative;
+  }
+  @media screen and (max-width: $c) {
+    bottom: 0;
+  }
+  @media only screen and (max-width: $xs) {
+    bottom: 0;
+    position: fixed;
+  }
+  @media only screen and (max-width: 640px) {
+    bottom: 0;
+    p {
+      font-size: 11px;
+      line-height: 12px;
+    }
+  }
+  @media only screen and (max-width: $a) {
+    bottom: 0;
+    p {
+      display: none;
+    }
+  }
+}
+
+.google-form {
+  @media only screen and (max-width: $g) {
     width: 95%;
     margin-top: 10px;
     overflow-x: no-scroll;
   }
-}// end: max width 1280
+}
 
-@media only screen and (min-width: $g) {
-  .footer {
-    bottom: 0;
-    position: fixed;
+#schoolinfo-placeholder {
+  @media only screen and (max-width: $f) {
+    display: none;
+  }
+  @media only screen and (max-width: $e) {
+    display: none;
+  }
+}
+
+#generalcontent a.boxlink {
+  @media only screen and (max-width: $f) {
+    font-size: 9px;
+    float: left;
+  }
+}
+
+.page-title {
+  @media screen and (max-width: $c) {
+    font-size: 25px;
+    line-height: 28px;
+  }
+}
+
+.header-announcements {
+  @media screen and (max-width: $c) {
+    display: none;
+  }
+}
+
+.hide-sm {
+  @media screen and (max-width: $c) {
+    display: none;
+  }
+}
+
+.show-sm {
+  @media screen and (max-width: $c) {
+    display: block;
+  }
+}
+
+#schoolinfo .top-school-badge {
+  @media screen and (max-width: $c) {
+    top: 30px;
+    img {
+      width: 60%;
+    }
   }
 }
 
 
-// start: max width 1024
-@media only screen and (max-width: $f) {
-  #schoolinfo-placeholder {
-    display: none;
-  }
-  #generalcontent a.boxlink {
-    font-size: 9px;
-    float: left;
-  }
-  .footer {
-    bottom: 0;
-  }
-} // end: max width 1024
-
-
-// start: max width 992
-@media only screen and (max-width: $e) {
-  #schoolinfo-placeholder {
-    display: none;
-  }
-  .footer {
-    position: relative;
-  }
-} // end: max width 992
-
-// start: max width 850
-@media screen and (max-width: $c) {
-  .page-title {
-    font-size: 25px;
-    line-height: 28px;
-  }
-  .footer {
-    bottom: 0;
-  }
-  .header-announcements {
-    display: none;
-  }
-  .hide-sm {
-    display: none;
-  }
-  .show-sm {
-    display: block;
-  }
-  #schoolinfo .top-school-badge {
-    top: 30px;
-  }
-  #schoolinfo .top-school-badge img {
-    width: 60%;
-  }
-} // end: max width 850
-
-// start: max 768
-@media only screen and (max-width: $xs) {
-  .navbar-lang {
+.navbar-lang {
+  @media only screen and (max-width: $xs) {
     background: none;
     position: absolute;
     top: 70px;
@@ -102,30 +131,26 @@
       }
     }
   }
-  .footer {
-    bottom: 0;
-    position: fixed;
+  @media only screen and (max-width: 640px) {
+    top: 61px;
   }
-  .jumbotron {
+}
+
+.jumbotron {
+  @media only screen and (max-width: $xs) {
     border-bottom: 0;
   }
 }
-// end: max 768
 
-@media only screen and (max-width: 640px) {
-  .navbar-lang {
-    top: 61px;
-  }
-  .navbar-toggle {
+.navbar-toggle {
+  @media only screen and (max-width: 640px) {
     @include border-radius(0px);
     padding: 11px;
   }
-  ul.main-nav li a:hover,
-  ul.main-nav li a:focus {
-    color: #ffffff;
-    outline: none;
-  }
-  .container-fluid > .navbar-collapse {
+}
+
+.container-fluid > .navbar-collapse {
+  @media only screen and (max-width: 640px) {
     position: absolute;
     top: 51px;
     right: 31px;
@@ -133,55 +158,43 @@
     background: $theme-blue;
     z-index: 1;
   }
-  ul.main-nav {
-    margin-top: 7px;
-  }
-  ul.main-nav li {
-    border-right: none;
-    margin-bottom: 10px;
-    text-align: right;
-  }
-  ul.main-nav li a {
-    color: #ffffff;
-    padding-right: 10px;
-    &:hover {
-      color: darken($body-text-color, 25%);
-    }
-  }
-  .splash-image {
-    margin-top: 37px;
-  }
-  .footer {
-    bottom: 0;
-    p {
-      font-size: 11px;
-      line-height: 12px;
-    }
-  }
-}
-
-@media only screen and (max-width: $a) {
-  .navbar-brand {
-    padding-right: 0;
-  }
-  .container-fluid > .navbar-collapse {
+  @media only screen and (max-width: $a) {
     width: 30%;
     top: 52px;
   }
-  .footer {
-    bottom: 0;
-    p {
-      display: none;
+}
+
+ul.main-nav {
+  @media only screen and (max-width: 640px) {
+    margin-top: 7px;
+    li {
+      border-right: none;
+      margin-bottom: 10px;
+      text-align: right;
+      a {
+        color: #ffffff;
+        padding-right: 10px;
+        &:hover,
+        &:focus {
+          color: darken($body-text-color, 25%);
+          outline: none;
+        }
+      }
     }
   }
 }
 
+.splash-image {
+  @media only screen and (max-width: 640px) {
+    margin-top: 37px;
+  }
+}
 
-// retina display sprites
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-    only screen and (min--moz-device-pixel-ratio: 1.5),
-    only screen and (min-resolution: 240dpi) {
-  .pass-rate {
+.pass-rate {
+  // retina
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+      only screen and (min--moz-device-pixel-ratio: 1.5),
+      only screen and (min-resolution: 240dpi) {
     background-image: url(../images/sprite-school-icons@x2.png);
     background-repeat: no-repeat;
     float: left;
