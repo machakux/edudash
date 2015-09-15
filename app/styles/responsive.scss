@@ -12,39 +12,17 @@
 }
 
 .footer {
-  @media only screen and (max-width: $g) {
-    position: relative;
-    p {
+  bottom: 0;
+  display: fixed;
+  p {
+    @media only screen and (max-width: $g) {
       margin-top: 8px;
     }
-  }
-  @media only screen and (min-width: $g) {
-    bottom: 0;
-    position: fixed;
-  }
-  @media only screen and (max-width: $f) {
-    bottom: 0;
-  }
-  @media only screen and (max-width: $e) {
-    position: relative;
-  }
-  @media screen and (max-width: $c) {
-    bottom: 0;
-  }
-  @media only screen and (max-width: $xs) {
-    bottom: 0;
-    position: fixed;
-  }
-  @media only screen and (max-width: 640px) {
-    bottom: 0;
-    p {
+    @media only screen and (max-width: 640px) {
       font-size: 11px;
       line-height: 12px;
     }
-  }
-  @media only screen and (max-width: $a) {
-    bottom: 0;
-    p {
+    @media only screen and (max-width: $a) {
       display: none;
     }
   }
