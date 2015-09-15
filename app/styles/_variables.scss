@@ -38,9 +38,10 @@ $filter-content-width: 360px;
 
 $footer-height: $header-height;
 
-$a: 480px;
-$xs:768px;  // bootstrap "xs" is below this
-$c: 850px;
-$e: 992px;
-$f: 1024px;
-$g: 1280px;
+$xxs: 480px;  // very small screens
+$xs-ish: 640px;  // small but not tiny?
+$xs: 768px;  // bootstrap "xs" is below this
+$sm-ish: 850px;  // weird in-between breakpoint :)
+$sm: 992px;  // bootstrap "sm" is below this
+$md-ish: 1024px;  // bootstrap "md" is up to 1170
+$lg-ish: 1280px;  // bootstrap "lg" is over 1200
