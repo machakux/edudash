@@ -116,8 +116,8 @@ angular.module('edudashAppSrv').service 'bracketsSrv', ($q, utils) ->
         when 'performance' then ['AVG_MARK', 'DESC']
         when 'improvement' then ['CHANGE_PREVIOUS_YEAR', 'DESC']
       when 'secondary' then switch criteria
-        when 'performance' then ['AVG_GPA', 'ASC']
-        when 'improvement' then ['CHANGE_PREVIOUS_YEAR_GPA', 'ASC']
+        when 'performance' then ['AVG_GPA', 'DESC']
+        when 'improvement' then ['CHANGE_PREVIOUS_YEAR_GPA', 'DESC']
 
   getRank: (schoolType) ->
     unless schoolType in ['primary', 'secondary']
