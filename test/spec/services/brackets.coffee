@@ -53,9 +53,9 @@ describe 'watchComputeSrv', ->
       expect b.getSortMetric 'primary', 'improvement'
         .toEqual ['CHANGE_PREVIOUS_YEAR', 'DESC']
       expect b.getSortMetric 'secondary', 'performance'
-        .toEqual ['AVG_GPA', 'ASC']
+        .toEqual ['AVG_GPA', 'DESC']
       expect b.getSortMetric 'secondary', 'improvement'
-        .toEqual ['CHANGE_PREVIOUS_YEAR_GPA', 'ASC']
+        .toEqual ['CHANGE_PREVIOUS_YEAR_GPA', 'DESC']
 
   describe 'getBracket', ->
     it 'should validate parameters', ->
