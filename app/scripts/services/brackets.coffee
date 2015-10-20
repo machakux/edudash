@@ -94,8 +94,8 @@ angular.module('edudashAppSrv').service 'bracketsSrv', ($q, utils) ->
         when 'most-improved' then qualify 'CHANGE_PREVIOUS_YEAR', 'DESC', 300
         else throw new Error "Unknown primary badge '#{badge}'"
       when 'secondary' then switch badge
-        when 'top-100' then qualify 'AVG_GPA', 'ASC', 100
-        when 'most-improved' then qualify 'CHANGE_PREVIOUS_YEAR_GPA', 'ASC', 100
+        when 'top-100' then qualify 'AVG_GPA', 'DESC', 100
+        when 'most-improved' then qualify 'CHANGE_PREVIOUS_YEAR_GPA', 'DESC', 100
         else throw new Error "Unknown secondary badge '#{badge}'"
       else throw new Error "Unknown schoolType '#{schoolType}'"
 
