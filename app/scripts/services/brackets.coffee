@@ -124,4 +124,4 @@ angular.module('edudashAppSrv').service 'bracketsSrv', ($q, utils) ->
       throw new Error "Unknown school type '#{schoolType}'"
     switch schoolType
       when 'primary' then ['AVG_MARK', 'DESC'] # AVG_MARK is sum of 5 exam from 0-50, greater the better, order desc
-      when 'secondary' then ['AVG_GPA', 'ASC'] # AVG_GPA lower the better. order asc
+      when 'secondary' then ['AVG_GPA', 'ASC'] # AVG_GPA lower the better. order asc (WHERE DOES THIS APPLY?)
