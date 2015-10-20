@@ -139,7 +139,7 @@ describe 'watchComputeSrv', ->
   describe 'getRank', ->
     it 'should rank by school', ->
       expect(b.getRank 'primary').toEqual ['AVG_MARK', 'DESC']
-      expect(b.getRank 'secondary').toEqual ['AVG_GPA', 'ASC']
+      expect(b.getRank 'secondary').toEqual ['AVG_GPA', 'DESC']
 
     it 'should validate parameters', ->
       expect -> b.getRank 'z'
