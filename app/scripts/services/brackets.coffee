@@ -94,8 +94,8 @@ angular.module('edudashAppSrv').service 'bracketsSrv', ($q, utils) ->
         when 'most-improved' then qualify 'CHANGE_PREVIOUS_YEAR', 'DESC', 300
         else throw new Error "Unknown primary badge '#{badge}'"
       when 'secondary' then switch badge
-        when 'top-100' then qualify 'AVG_GPA', 'ASC', 100
-        when 'most-improved' then qualify 'CHANGE_PREVIOUS_YEAR_GPA', 'ASC', 100
+        when 'top-100' then qualify 'AVG_GPA', 'DESC', 100
+        when 'most-improved' then qualify 'CHANGE_PREVIOUS_YEAR_GPA', 'DESC', 100
         else throw new Error "Unknown secondary badge '#{badge}'"
       else throw new Error "Unknown schoolType '#{schoolType}'"
 
@@ -116,12 +116,12 @@ angular.module('edudashAppSrv').service 'bracketsSrv', ($q, utils) ->
         when 'performance' then ['AVG_MARK', 'DESC']
         when 'improvement' then ['CHANGE_PREVIOUS_YEAR', 'DESC']
       when 'secondary' then switch criteria
-        when 'performance' then ['AVG_GPA', 'ASC']
-        when 'improvement' then ['CHANGE_PREVIOUS_YEAR_GPA', 'ASC']
+        when 'performance' then ['AVG_GPA', 'DESC']
+        when 'improvement' then ['CHANGE_PREVIOUS_YEAR_GPA', 'DESC']
 
   getRank: (schoolType) ->
     unless schoolType in ['primary', 'secondary']
       throw new Error "Unknown school type '#{schoolType}'"
     switch schoolType
       when 'primary' then ['AVG_MARK', 'DESC'] # AVG_MARK is sum of 5 exam from 0-50, greater the better, order desc
-      when 'secondary' then ['AVG_GPA', 'ASC'] # AVG_GPA lower the better. order asc
+      when 'secondary' then ['AVG_GPA', 'ASC'] # AVG_GPA lower the better. order asc (WHERE DOES THIS APPLY?)
